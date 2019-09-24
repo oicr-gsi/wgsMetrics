@@ -1,0 +1,27 @@
+{
+    "defaults": {
+        "description": "WGSMetrics workflow test",
+        "metrics_calculate": "calculate.sh",
+        "metrics_compare": "compare.sh",
+        "input_config_dir": "/.mounts/labs/PDE/data/RegressionTests/WGSMetrics/workflow/input_config",
+        "output_metrics_dir": "/.mounts/labs/PDE/data/RegressionTests/WGSMetrics/workflow/output_expectation/",
+        "parameters": {
+          "wdl_options": {
+            "write_to_cache": false,
+            "read_from_cache": false
+           }
+         }
+    },
+    "tests": [
+        {
+            "id": "test_01_wgs_basic",
+            "parameters": {
+              "wdl_inputs": {
+                "wgsmetricsWorkflow.refFasta": "$HG19_ROOT/hg19_random.fa",
+                "wgsmetricsWorkflow.inputBam": "/.mounts/labs/PDE/data/testdata/genomic/bam/TGL_test/Sequenza/TGL01_0001_Sk_M_PE_426_EX.sorted.filter.deduped.realign.recal.bam",
+                "wgsmetricsWorkflow.outputPrefix": ".INS-D-004-ST"
+              }
+            }
+        }
+    ]
+}
