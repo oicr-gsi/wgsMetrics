@@ -29,8 +29,8 @@ input {
         String? metricTag  = "WGS"
         String? filter     = "LENIENT"
         String? outputPrefix = ""
-        Int?   jobMemory   = 18
-        Int?   javaMemory  = 12
+        Int?   jobMemory   = 20
+        Int?   javaMemory  = 14
         Int?   coverageCap = 500
         String? modules    = "java/8 picard/2.19.2 hg19/p13"
 }
