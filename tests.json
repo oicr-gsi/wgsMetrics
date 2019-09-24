@@ -17,9 +17,9 @@
             "id": "test_01_wgs_basic",
             "parameters": {
               "wdl_inputs": {
-                "wgsmetricsWorkflow.refFasta": "$HG19_ROOT/hg19_random.fa",
-                "wgsmetricsWorkflow.inputBam": "/.mounts/labs/PDE/data/testdata/genomic/bam/TGL_test/Sequenza/TGL01_0001_Sk_M_PE_426_EX.sorted.filter.deduped.realign.recal.bam",
-                "wgsmetricsWorkflow.outputPrefix": ".INS-D-004-ST"
+                "wgsMetrics.refFasta": "$HG19_ROOT/hg19_random.fa",
+                "wgsMetrics.inputBam": "/.mounts/labs/PDE/data/testdata/genomic/bam/TGL_test/Sequenza/TGL01_0001_Sk_M_PE_426_EX.sorted.filter.deduped.realign.recal.bam",
+                "wgsMetrics.outputPrefix": ".INS-D-004-ST"
               }
             }
         }
