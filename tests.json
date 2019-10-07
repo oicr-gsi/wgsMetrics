@@ -17,7 +17,6 @@
             "id": "test_01_wgs_basic",
             "parameters": {
               "wdl_inputs": {
-                "wgsMetrics.refFasta": "$HG19_ROOT/hg19_random.fa",
                 "wgsMetrics.inputBam": "/.mounts/labs/PDE/data/testdata/genomic/bam/PCSI_0090WG_downsampled/PCSI_0090_Pa_P_PE_501_WG_526_170203_D00343_0160_ACACFLANXX_CCGTCC_L008_001.annotated.chr22.bam",
                 "wgsMetrics.outputFileNamePrefix": "PCSI_0090_Pa_P_PE_501_WG_526_170203_D00343_0160_ACACFLANXX_CCGTCC_L008_001"
               }
