@@ -15,10 +15,10 @@ output {
 }
 
 meta {
-    author: "Peter Ruzanov"
-    email: "peter.ruzanov@oicr.on.ca"
-    description: "WGSMetrics 1.0"
-  }
+  author: "Peter Ruzanov"
+  email: "peter.ruzanov@oicr.on.ca"
+  description: "WGSMetrics 1.0"
+}
 
 }
 
@@ -59,7 +59,7 @@ command <<<
 >>>
 
 runtime {
-  memory:  "~{javaMemory + 4} GB"
+  memory:  "~{javaMemory + 6} GB"
   modules: "~{modules}"
 }
 
