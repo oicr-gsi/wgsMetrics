@@ -32,7 +32,7 @@ input {
         String? metricTag  = "WGS"
         String? filter     = "LENIENT"
         String? outputPrefix = "OUTPUT"
-        Int?   javaMemory  = 12
+        Int?   jobMemory   = 18
         Int?   coverageCap = 500
         String? modules    = "java/8 picard/2.19.2 hg19/p13"
 }
@@ -43,13 +43,13 @@ parameter_meta {
  metricTag: "matric tag is used as a file extension for output"
  filter: "Picard filter to use"
  outputPrefix: "Output prefix, either input file basename or custom string"
- javaMemory: "memory allocated for Java"
+ jobMemory: "memory allocated for Job"
  coverageCap: "Coverage cap, picard parameter"
  modules: "Names and versions of modules for picard-tools, java and reference genome"
 }
 
 command <<<
- java -Xmx~{javaMemory}G -jar $PICARD_ROOT/picard.jar CollectWgsMetrics \
+ java -Xmx~{jobMemory-4}G -jar $PICARD_ROOT/picard.jar CollectWgsMetrics \
                               TMP_DIR=picardTmp \
                               R=~{refFasta} \
                               COVERAGE_CAP=~{coverageCap} \
@@ -59,7 +59,7 @@ command <<<
 >>>
 
 runtime {
-  memory:  "~{javaMemory + 6} GB"
+  memory:  "~{jobMemory} GB"
   modules: "~{modules}"
 }
 
