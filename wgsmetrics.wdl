@@ -29,7 +29,7 @@ task collectWGSmetrics {
 input { 
         File   inputBam
         String? refFasta = "$HG19_ROOT/hg19_random.fa"
-        String? metricTag  = "WGS"
+        String? metricTag  = "txt"
         String? filter     = "LENIENT"
         String? outputPrefix = "OUTPUT"
         Int?   jobMemory   = 18
