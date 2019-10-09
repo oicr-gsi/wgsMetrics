@@ -29,7 +29,7 @@ task collectWGSmetrics {
 input { 
         File   inputBam
         String? refFasta = "$HG19_ROOT/hg19_random.fa"
-        String? metricTag  = "txt"
+        String? metricTag  = "HS"
         String? filter     = "LENIENT"
         String? outputPrefix = "OUTPUT"
         Int?   jobMemory   = 18
@@ -54,7 +54,7 @@ command <<<
                               R=~{refFasta} \
                               COVERAGE_CAP=~{coverageCap} \
                               INPUT=~{inputBam} \
-                              OUTPUT="~{outputPrefix}.~{metricTag}" \
+                              OUTPUT="~{outputPrefix}.~{metricTag}.txt" \
                               VALIDATION_STRINGENCY=~{filter} 
 >>>
 
@@ -64,7 +64,7 @@ runtime {
 }
 
 output {
-  File outputWGSMetrics = "~{outputPrefix}.~{metricTag}"
+  File outputWGSMetrics = "~{outputPrefix}.~{metricTag}.txt"
 }
 }
 
