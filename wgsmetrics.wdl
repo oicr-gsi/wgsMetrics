@@ -49,7 +49,7 @@ parameter_meta {
 }
 
 command <<<
- java -Xmx~{jobMemory-4}G -jar $PICARD_ROOT/picard.jar CollectWgsMetrics \
+ java -Xmx~{jobMemory-6}G -jar $PICARD_ROOT/picard.jar CollectWgsMetrics \
                               TMP_DIR=picardTmp \
                               R=~{refFasta} \
                               COVERAGE_CAP=~{coverageCap} \
