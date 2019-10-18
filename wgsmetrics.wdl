@@ -34,7 +34,7 @@ input {
         String? outputPrefix = "OUTPUT"
         Int?   jobMemory   = 18
         Int?   coverageCap = 500
-        String? modules    = "java/8 picard/2.19.2 hg19/p13"
+        String? modules    = "picard/2.19.2 hg19/p13"
 }
 
 parameter_meta {
