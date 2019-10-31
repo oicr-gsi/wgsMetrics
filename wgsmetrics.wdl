@@ -10,8 +10,16 @@ String? outputPrefix = if outputFileNamePrefix=="" then basename(inputBam, '.bam
 
 call collectWGSmetrics{ input: inputBam = inputBam, outputPrefix = outputPrefix }
 
+call collectInsertSizeMetrics {
+  input:
+    inputBam = inputBam,
+    outputPrefix = outputPrefix
+}
+
 output {
   File outputWGSMetrics  = collectWGSmetrics.outputWGSMetrics
+  File insertSizeMetrics = collectInsertSizeMetrics.insertSizeMetrics
+  File histogramReport = collectInsertSizeMetrics.histogramReport
 }
 
 meta {
@@ -28,6 +36,7 @@ meta {
 task collectWGSmetrics {
 input { 
         File   inputBam
+        String? picardJar = "$PICARD_ROOT/picard.jar"
         String? refFasta = "$HG19_ROOT/hg19_random.fa"
         String? metricTag  = "HS"
         String? filter     = "LENIENT"
@@ -49,7 +58,7 @@ parameter_meta {
 }
 
 command <<<
- java -Xmx~{jobMemory-6}G -jar $PICARD_ROOT/picard.jar CollectWgsMetrics \
+ java -Xmx~{jobMemory-6}G -jar ~{picardJar} CollectWgsMetrics \
                               TMP_DIR=picardTmp \
                               R=~{refFasta} \
                               COVERAGE_CAP=~{coverageCap} \
@@ -68,3 +77,33 @@ output {
 }
 }
 
+task collectInsertSizeMetrics {
+  input {
+    File   inputBam
+    String? picardJar = "$PICARD_ROOT/picard.jar"
+    Float? minimumPercent = 0.5
+    String? outputPrefix = "OUTPUT"
+    Int?   jobMemory   = 18
+    String? modules    = "picard/2.19.2"
+  }
+
+  command <<<
+    java -Xmx~{jobMemory-6}G -jar ~{picardJar} \
+    CollectInsertSizeMetrics \
+    TMP_DIR=picardTmp \
+    INPUT=~{inputBam} \
+	  OUTPUT="~{outputPrefix}.isize.txt" \
+	  HISTOGRAM_FILE="~{outputPrefix}.histogram.pdf" \
+	  MINIMUM_PCT=~{minimumPercent}
+  >>>
+
+  runtime {
+    memory:  "~{jobMemory} GB"
+    modules: "~{modules}"
+  }
+
+  output {
+    File insertSizeMetrics = "~{outputPrefix}.isize.txt"
+    File histogramReport = "~{outputPrefix}.histogram.pdf"
+  }
+}
