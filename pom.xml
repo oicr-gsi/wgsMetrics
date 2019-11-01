@@ -16,7 +16,7 @@
     <properties>
         <workflow-description>Workflow to run picard WGS metrics reporter module.</workflow-description>
 	<wdl-workflow>wgsmetrics.wdl</wdl-workflow>
-        <test-definition>tests.json</test-definition>
+        <test-basedir>tests/</test-basedir>
     </properties>
 
 </project>
