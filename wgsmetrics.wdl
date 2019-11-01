@@ -92,9 +92,9 @@ task collectInsertSizeMetrics {
     CollectInsertSizeMetrics \
     TMP_DIR=picardTmp \
     INPUT=~{inputBam} \
-	  OUTPUT="~{outputPrefix}.isize.txt" \
-	  HISTOGRAM_FILE="~{outputPrefix}.histogram.pdf" \
-	  MINIMUM_PCT=~{minimumPercent}
+    OUTPUT="~{outputPrefix}.isize.txt" \
+    HISTOGRAM_FILE="~{outputPrefix}.histogram.pdf" \
+    MINIMUM_PCT=~{minimumPercent}
   >>>
 
   runtime {
