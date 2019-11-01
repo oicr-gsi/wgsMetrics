@@ -86,7 +86,7 @@ task collectInsertSizeMetrics {
     Float? minimumPercent = 0.5
     String? outputPrefix = "OUTPUT"
     Int? jobMemory = 18
-    String? modules = "picard/2.19.2"
+    String? modules = "picard/2.19.2 rstats/3.6"
   }
 
   command <<<
