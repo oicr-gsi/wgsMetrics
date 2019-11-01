@@ -3,21 +3,19 @@ version 1.0
 workflow wgsMetrics {
   input {
     File inputBam
-    String? outputFileNamePrefix = ""
+    String? outputFileNamePrefix = basename(inputBam, '.bam')
   }
-
-  String? outputPrefix = if outputFileNamePrefix == "" then basename(inputBam, '.bam') else outputFileNamePrefix
 
   call collectWGSmetrics {
     input:
       inputBam = inputBam,
-      outputPrefix = outputPrefix
+      outputPrefix = outputFileNamePrefix
   }
 
   call collectInsertSizeMetrics {
     input:
       inputBam = inputBam,
-      outputPrefix = outputPrefix
+      outputPrefix = outputFileNamePrefix
   }
 
   output {
