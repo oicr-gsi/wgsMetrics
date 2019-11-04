@@ -44,18 +44,25 @@ task collectWGSmetrics {
     String? outputPrefix = "OUTPUT"
     Int? jobMemory = 18
     Int? coverageCap = 500
-    String? modules = "picard/2.19.2 hg19/p13"
+    String? modules = "picard/2.21.2 hg19/p13"
   }
 
   parameter_meta {
-    inputBam: "Input .bam file"
+    picardJar: "Picard jar file to use"
+    inputBam: "Input file (bam or sam)"
     refFasta: "Path to the reference fasta"
-    metricTag: "matric tag is used as a file extension for output"
+    metricTag: "metric tag is used as a file extension for output"
     filter: "Picard filter to use"
     outputPrefix: "Output prefix, either input file basename or custom string"
     jobMemory: "memory allocated for Job"
     coverageCap: "Coverage cap, picard parameter"
-    modules: "Names and versions of modules for picard-tools, java and reference genome"
+    modules: "Environment module names and version to load (space separated) before command execution"
+  }
+
+  meta {
+    output_meta : {
+      outputWGSMetrics: "Metrics about the fractions of reads that pass base and mapping-quality filters as well as coverage (read-depth) levels (see https://broadinstitute.github.io/picard/picard-metric-definitions.html#CollectWgsMetrics.WgsMetrics)"
+    }
   }
 
   command <<<
@@ -86,7 +93,23 @@ task collectInsertSizeMetrics {
     Float? minimumPercent = 0.5
     String? outputPrefix = "OUTPUT"
     Int? jobMemory = 18
-    String? modules = "picard/2.19.2 rstats/3.6"
+    String? modules = "picard/2.21.2 rstats/3.6"
+  }
+
+  parameter_meta {
+    picardJar: "The picard jar to use"
+    inputBam: "Input file (bam or sam)"
+    minimumPercent: "Discard any data categories (out of FR, TANDEM, RF) when generating the histogram (Range: 0 to 1)"
+    outputPrefix: "Output prefix to prefix output file names with"
+    jobMemory: "Memory (in GB) allocated for job"
+    modules: "Environment module names and version to load (space separated) before command execution"
+  }
+
+  meta {
+    output_meta : {
+      insertSizeMetrics: "Metrics about the insert size distribution (see https://broadinstitute.github.io/picard/picard-metric-definitions.html#InsertSizeMetrics)",
+      histogramReport: "Insert size distribution plot"
+    }
   }
 
   command <<<
