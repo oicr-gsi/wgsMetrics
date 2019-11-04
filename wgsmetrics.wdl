@@ -12,16 +12,8 @@ workflow wgsMetrics {
       outputPrefix = outputFileNamePrefix
   }
 
-  call collectInsertSizeMetrics {
-    input:
-      inputBam = inputBam,
-      outputPrefix = outputFileNamePrefix
-  }
-
   output {
     File outputWGSMetrics  = collectWGSmetrics.outputWGSMetrics
-    File insertSizeMetrics = collectInsertSizeMetrics.insertSizeMetrics
-    File histogramReport = collectInsertSizeMetrics.histogramReport
   }
 
   meta {
@@ -83,52 +75,5 @@ task collectWGSmetrics {
 
   output {
     File outputWGSMetrics = "~{outputPrefix}.~{metricTag}.txt"
-  }
-}
-
-task collectInsertSizeMetrics {
-  input {
-    File inputBam
-    String? picardJar = "$PICARD_ROOT/picard.jar"
-    Float? minimumPercent = 0.5
-    String? outputPrefix = "OUTPUT"
-    Int? jobMemory = 18
-    String? modules = "picard/2.21.2 rstats/3.6"
-  }
-
-  parameter_meta {
-    picardJar: "The picard jar to use"
-    inputBam: "Input file (bam or sam)"
-    minimumPercent: "Discard any data categories (out of FR, TANDEM, RF) when generating the histogram (Range: 0 to 1)"
-    outputPrefix: "Output prefix to prefix output file names with"
-    jobMemory: "Memory (in GB) allocated for job"
-    modules: "Environment module names and version to load (space separated) before command execution"
-  }
-
-  meta {
-    output_meta : {
-      insertSizeMetrics: "Metrics about the insert size distribution (see https://broadinstitute.github.io/picard/picard-metric-definitions.html#InsertSizeMetrics)",
-      histogramReport: "Insert size distribution plot"
-    }
-  }
-
-  command <<<
-    java -Xmx~{jobMemory-6}G -jar ~{picardJar} \
-    CollectInsertSizeMetrics \
-    TMP_DIR=picardTmp \
-    INPUT=~{inputBam} \
-    OUTPUT="~{outputPrefix}.isize.txt" \
-    HISTOGRAM_FILE="~{outputPrefix}.histogram.pdf" \
-    MINIMUM_PCT=~{minimumPercent}
-  >>>
-
-  runtime {
-    memory: "~{jobMemory} GB"
-    modules: "~{modules}"
-  }
-
-  output {
-    File insertSizeMetrics = "~{outputPrefix}.isize.txt"
-    File histogramReport = "~{outputPrefix}.histogram.pdf"
   }
 }
