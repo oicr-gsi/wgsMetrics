@@ -1,70 +1,79 @@
 version 1.0
 
 workflow wgsMetrics {
-input {
-    File    inputBam
-    String? outputFileNamePrefix = ""
-}
+  input {
+    File inputBam
+    String? outputFileNamePrefix = basename(inputBam, '.bam')
+  }
 
-String? outputPrefix = if outputFileNamePrefix=="" then basename(inputBam, '.bam') else outputFileNamePrefix
+  call collectWGSmetrics {
+    input:
+      inputBam = inputBam,
+      outputPrefix = outputFileNamePrefix
+  }
 
-call collectWGSmetrics{ input: inputBam = inputBam, outputPrefix = outputPrefix }
+  output {
+    File outputWGSMetrics  = collectWGSmetrics.outputWGSMetrics
+  }
 
-output {
-  File outputWGSMetrics  = collectWGSmetrics.outputWGSMetrics
-}
-
-meta {
-  author: "Peter Ruzanov"
-  email: "peter.ruzanov@oicr.on.ca"
-  description: "WGSMetrics 1.0"
-}
-
+  meta {
+    author: "Peter Ruzanov"
+    email: "peter.ruzanov@oicr.on.ca"
+    description: "WGSMetrics 1.0"
+  }
 }
 
 # ==========================================
 #  TASK 1 of 1: collect WGS metric
 # ==========================================
 task collectWGSmetrics {
-input { 
-        File   inputBam
-        String? refFasta = "$HG19_ROOT/hg19_random.fa"
-        String? metricTag  = "HS"
-        String? filter     = "LENIENT"
-        String? outputPrefix = "OUTPUT"
-        Int?   jobMemory   = 18
-        Int?   coverageCap = 500
-        String? modules    = "picard/2.19.2 hg19/p13"
-}
+  input {
+    File inputBam
+    String? picardJar = "$PICARD_ROOT/picard.jar"
+    String? refFasta = "$HG19_ROOT/hg19_random.fa"
+    String? metricTag = "HS"
+    String? filter = "LENIENT"
+    String? outputPrefix = "OUTPUT"
+    Int? jobMemory = 18
+    Int? coverageCap = 500
+    String? modules = "picard/2.21.2 hg19/p13"
+  }
 
-parameter_meta {
- inputBam: "Input .bam file"
- refFasta: "Path to the reference fasta"
- metricTag: "matric tag is used as a file extension for output"
- filter: "Picard filter to use"
- outputPrefix: "Output prefix, either input file basename or custom string"
- jobMemory: "memory allocated for Job"
- coverageCap: "Coverage cap, picard parameter"
- modules: "Names and versions of modules for picard-tools, java and reference genome"
-}
+  parameter_meta {
+    picardJar: "Picard jar file to use"
+    inputBam: "Input file (bam or sam)"
+    refFasta: "Path to the reference fasta"
+    metricTag: "metric tag is used as a file extension for output"
+    filter: "Picard filter to use"
+    outputPrefix: "Output prefix, either input file basename or custom string"
+    jobMemory: "memory allocated for Job"
+    coverageCap: "Coverage cap, picard parameter"
+    modules: "Environment module names and version to load (space separated) before command execution"
+  }
 
-command <<<
- java -Xmx~{jobMemory-6}G -jar $PICARD_ROOT/picard.jar CollectWgsMetrics \
-                              TMP_DIR=picardTmp \
-                              R=~{refFasta} \
-                              COVERAGE_CAP=~{coverageCap} \
-                              INPUT=~{inputBam} \
-                              OUTPUT="~{outputPrefix}.~{metricTag}.txt" \
-                              VALIDATION_STRINGENCY=~{filter} 
->>>
+  meta {
+    output_meta : {
+      outputWGSMetrics: "Metrics about the fractions of reads that pass base and mapping-quality filters as well as coverage (read-depth) levels (see https://broadinstitute.github.io/picard/picard-metric-definitions.html#CollectWgsMetrics.WgsMetrics)"
+    }
+  }
 
-runtime {
-  memory:  "~{jobMemory} GB"
-  modules: "~{modules}"
-}
+  command <<<
+    java -Xmx~{jobMemory-6}G -jar ~{picardJar} \
+    CollectWgsMetrics \
+    TMP_DIR=picardTmp \
+    R=~{refFasta} \
+    COVERAGE_CAP=~{coverageCap} \
+    INPUT=~{inputBam} \
+    OUTPUT="~{outputPrefix}.~{metricTag}.txt" \
+    VALIDATION_STRINGENCY=~{filter}
+  >>>
 
-output {
-  File outputWGSMetrics = "~{outputPrefix}.~{metricTag}.txt"
-}
-}
+  runtime {
+    memory:  "~{jobMemory} GB"
+    modules: "~{modules}"
+  }
 
+  output {
+    File outputWGSMetrics = "~{outputPrefix}.~{metricTag}.txt"
+  }
+}
