@@ -3,7 +3,7 @@ version 1.0
 workflow wgsMetrics {
   input {
     File inputBam
-    String? outputFileNamePrefix = basename(inputBam, '.bam')
+    String outputFileNamePrefix = basename(inputBam, '.bam')
   }
 
   call collectWGSmetrics {
@@ -16,27 +16,33 @@ workflow wgsMetrics {
     File outputWGSMetrics  = collectWGSmetrics.outputWGSMetrics
   }
 
+  parameter_meta {
+    inputBam: "Input file (bam or sam)."
+    outputFileNamePrefix: "Output prefix to prefix output file names with."
+  }
+
   meta {
     author: "Peter Ruzanov"
     email: "peter.ruzanov@oicr.on.ca"
-    description: "WGSMetrics 1.0"
+    description: "Workflow to run picard WGSMetrics"
+    dependencies: [{
+      name: "picard/2.21.2",
+      url: "https://broadinstitute.github.io/picard/"
+    }]
   }
 }
 
-# ==========================================
-#  TASK 1 of 1: collect WGS metric
-# ==========================================
 task collectWGSmetrics {
   input {
     File inputBam
-    String? picardJar = "$PICARD_ROOT/picard.jar"
-    String? refFasta = "$HG19_ROOT/hg19_random.fa"
-    String? metricTag = "HS"
-    String? filter = "LENIENT"
-    String? outputPrefix = "OUTPUT"
-    Int? jobMemory = 18
-    Int? coverageCap = 500
-    String? modules = "picard/2.21.2 hg19/p13"
+    String picardJar = "$PICARD_ROOT/picard.jar"
+    String refFasta = "$HG19_ROOT/hg19_random.fa"
+    String metricTag = "HS"
+    String filter = "LENIENT"
+    String outputPrefix = "OUTPUT"
+    Int jobMemory = 18
+    Int coverageCap = 500
+    String modules = "picard/2.21.2 hg19/p13"
   }
 
   parameter_meta {
