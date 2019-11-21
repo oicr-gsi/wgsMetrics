@@ -31,7 +31,7 @@ task collectWGSmetrics {
     File inputBam
     String? picardJar = "$PICARD_ROOT/picard.jar"
     String? refFasta = "$HG19_ROOT/hg19_random.fa"
-    String? metricTag = "HS"
+    String? metricTag = "WGS"
     String? filter = "LENIENT"
     String? outputPrefix = "OUTPUT"
     Int? jobMemory = 18
