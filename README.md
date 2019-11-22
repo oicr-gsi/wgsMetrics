@@ -35,7 +35,7 @@ Parameter|Value|Default|Description
 ---|---|---|---
 `collectWGSmetrics.picardJar`|String|"$PICARD_ROOT/picard.jar"|Picard jar file to use
 `collectWGSmetrics.refFasta`|String|"$HG19_ROOT/hg19_random.fa"|Path to the reference fasta
-`collectWGSmetrics.metricTag`|String|"HS"|metric tag is used as a file extension for output
+`collectWGSmetrics.metricTag`|String|"WGS"|metric tag is used as a file extension for output
 `collectWGSmetrics.filter`|String|"LENIENT"|Picard filter to use
 `collectWGSmetrics.jobMemory`|Int|18|memory allocated for Job
 `collectWGSmetrics.coverageCap`|Int|500|Coverage cap, picard parameter
