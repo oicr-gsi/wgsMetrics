@@ -13,7 +13,7 @@ Workflow to run picard WGSMetrics
 
 ### Cromwell
 ```
-java -jar cromwell.jar run wgsmetrics.wdl --inputs inputs.json
+java -jar cromwell.jar run wgsMetrics.wdl --inputs inputs.json
 ```
 
 ### Inputs

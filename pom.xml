@@ -9,13 +9,13 @@
         <relativePath/>
     </parent>
 
-    <artifactId>WGSMetrics</artifactId>
+    <artifactId>wgsMetrics</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
     <properties>
         <workflow-description>Workflow to run picard WGS metrics reporter module.</workflow-description>
-	<wdl-workflow>wgsmetrics.wdl</wdl-workflow>
+	    <wdl-workflow>wgsMetrics.wdl</wdl-workflow>
         <test-basedir>tests/</test-basedir>
     </properties>
 
