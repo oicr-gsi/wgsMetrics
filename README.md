@@ -40,6 +40,7 @@ Parameter|Value|Default|Description
 `collectWGSmetrics.jobMemory`|Int|18|memory allocated for Job
 `collectWGSmetrics.coverageCap`|Int|500|Coverage cap, picard parameter
 `collectWGSmetrics.modules`|String|"picard/2.21.2 hg19/p13"|Environment module names and version to load (space separated) before command execution
+`collectWGSmetrics.timeout`|Int|24|Maximum amount of time (in hours) the task can run for.
 
 
 ### Outputs

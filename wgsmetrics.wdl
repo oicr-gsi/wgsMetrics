@@ -43,6 +43,7 @@ task collectWGSmetrics {
     Int jobMemory = 18
     Int coverageCap = 500
     String modules = "picard/2.21.2 hg19/p13"
+    Int timeout = 24
   }
 
   parameter_meta {
@@ -55,6 +56,7 @@ task collectWGSmetrics {
     jobMemory: "memory allocated for Job"
     coverageCap: "Coverage cap, picard parameter"
     modules: "Environment module names and version to load (space separated) before command execution"
+    timeout: "Maximum amount of time (in hours) the task can run for."
   }
 
   meta {
@@ -77,6 +79,7 @@ task collectWGSmetrics {
   runtime {
     memory:  "~{jobMemory} GB"
     modules: "~{modules}"
+    timeout: "~{timeout}"
   }
 
   output {
