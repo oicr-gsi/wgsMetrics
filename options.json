@@ -1,0 +1,6 @@
+{
+  "default_runtime_attributes": {
+    "docker": "g3chen/wgsmetrics@sha256:5517c524bd0d3b39273b0ac4e16a52fc94b8d9c2c787e79a548183a1acc08670",
+    "docker_volume": "/home/ubuntu/Downloads/sample_data:/data"
+  }
+}
