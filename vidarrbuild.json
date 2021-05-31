@@ -1,0 +1,7 @@
+{
+    "names": [
+        "wgsmetrics_call_ready",
+        "wgsmetrics_by_tumor_group"
+    ],
+    "wdl": "wgsMetrics.wdl"
+}
