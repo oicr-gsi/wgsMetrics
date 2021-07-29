@@ -50,32 +50,26 @@ Output | Type | Description
 `outputWGSMetrics`|File|Metrics about the fractions of reads that pass base and mapping-quality filters as well as coverage (read-depth) levels (see https://broadinstitute.github.io/picard/picard-metric-definitions.html#CollectWgsMetrics.WgsMetrics)
 
 
-## Niassa + Cromwell
-
-This WDL workflow is wrapped in a Niassa workflow (https://github.com/oicr-gsi/pipedev/tree/master/pipedev-niassa-cromwell-workflow) so that it can used with the Niassa metadata tracking system (https://github.com/oicr-gsi/niassa).
-
-* Building
-```
-mvn clean install
-```
-
-* Testing
-```
-mvn clean verify \
--Djava_opts="-Xmx1g -XX:+UseG1GC -XX:+UseStringDeduplication" \
--DrunTestThreads=2 \
--DskipITs=false \
--DskipRunITs=false \
--DworkingDirectory=/path/to/tmp/ \
--DschedulingHost=niassa_oozie_host \
--DwebserviceUrl=http://niassa-url:8080 \
--DwebserviceUser=niassa_user \
--DwebservicePassword=niassa_user_password \
--Dcromwell-host=http://cromwell-url:8000
-```
-
-## Support
+## Commands
+ 
+ This section lists command(s) run by wgsmetrics workflow
+ 
+ * Running wgsmetrics
+ 
+ A simple wrapper workflow for running picard CollectWgsMetrics.
+ 
+ ```
+     java -Xmx[MEMORY]G -jar picard
+     CollectWgsMetrics 
+     TMP_DIR=picardTmp 
+     R=REF_FASTA 
+     COVERAGE_CAP=COVERAGE_CAP 
+     INPUT=INPUT_BAM 
+     OUTPUT=PREFIX.METRICS_TAG.txt" 
+     VALIDATION_STRINGENCY=FILTER
+ ```
+ ## Support
 
 For support, please file an issue on the [Github project](https://github.com/oicr-gsi) or send an email to gsi@oicr.on.ca .
 
-_Generated with wdl_doc_gen (https://github.com/oicr-gsi/wdl_doc_gen/)_
+_Generated with generate-markdown-readme (https://github.com/oicr-gsi/gsi-wdl-tools/)_
