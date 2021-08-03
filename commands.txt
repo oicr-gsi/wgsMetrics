@@ -1,0 +1,18 @@
+## Commands
+
+This section lists command(s) run by wgsmetrics workflow
+
+* Running wgsmetrics
+
+A simple wrapper workflow for running picard CollectWgsMetrics.
+
+```
+    java -Xmx[MEMORY]G -jar picard
+    CollectWgsMetrics 
+    TMP_DIR=picardTmp 
+    R=REF_FASTA 
+    COVERAGE_CAP=COVERAGE_CAP 
+    INPUT=INPUT_BAM 
+    OUTPUT=PREFIX.METRICS_TAG.txt" 
+    VALIDATION_STRINGENCY=FILTER
+```
