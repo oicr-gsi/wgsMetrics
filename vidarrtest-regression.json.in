@@ -24,7 +24,10 @@
             "wgsMetrics.outputFileNamePrefix": "PCSI_0090_Pa_P_PE_501_WG_526_170203_D00343_0160_ACACFLANXX_CCGTCC_L008_001"
         },
         "description": "WGSMetrics workflow test",
-        "engineArguments": {},
+        "engineArguments": {
+	   "write_to_cache": false,
+           "read_from_cache": false	       
+	},
         "id": "test_01_wgs_basic",
         "metadata": {
             "wgsMetrics.outputWGSMetrics": {
@@ -70,7 +73,10 @@
             "wgsMetrics.outputFileNamePrefix": null
         },
         "description": "WGSMetrics workflow test",
-        "engineArguments": {},
+        "engineArguments": {
+	   "write_to_cache": false,
+	   "read_from_cache": false
+	},
         "id": "no_output_prefix",
         "metadata": {
             "wgsMetrics.outputWGSMetrics": {
