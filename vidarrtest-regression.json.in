@@ -2,6 +2,7 @@
     {
         "arguments": {
             "wgsMetrics.collectWGSmetrics.coverageCap": null,
+            "wgsMetrics.reference": "hg19", 
             "wgsMetrics.collectWGSmetrics.filter": null,
             "wgsMetrics.collectWGSmetrics.jobMemory": null,
             "wgsMetrics.collectWGSmetrics.metricTag": null,
@@ -50,6 +51,7 @@
     },
     {
         "arguments": {
+            "wgsMetrics.reference": "hg19", 
             "wgsMetrics.collectWGSmetrics.coverageCap": null,
             "wgsMetrics.collectWGSmetrics.filter": null,
             "wgsMetrics.collectWGSmetrics.jobMemory": null,
