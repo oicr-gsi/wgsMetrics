@@ -1,15 +1,34 @@
 version 1.0
 
+struct GenomeResources {
+  String refFasta
+  String modules
+}
+
 workflow wgsMetrics {
   input {
     File inputBam
     String outputFileNamePrefix = basename(inputBam, '.bam')
+    String reference
   }
+
+Map[String, GenomeResources] resources = {
+  "hg19":{
+        "refFasta": "$HG19_ROOT/hg19_random.fa",
+        "modules": "picard/2.21.2 hg19/p13"
+      },
+  "hg38":{
+        "refFasta": "$HG38_ROOT/hg38_random.fa",
+        "modules": "picard/2.21.2 hg38/p12"
+      }
+}
 
   call collectWGSmetrics {
     input:
       inputBam = inputBam,
-      outputPrefix = outputFileNamePrefix
+      outputPrefix = outputFileNamePrefix,
+      refFasta = resources[reference].refFasta,
+      modules = resources[reference].modules
   }
 
   output {
@@ -19,6 +38,7 @@ workflow wgsMetrics {
   parameter_meta {
     inputBam: "Input file (bam or sam)."
     outputFileNamePrefix: "Output prefix to prefix output file names with."
+    reference: "reference genome of inputs sample"
   }
 
   meta {

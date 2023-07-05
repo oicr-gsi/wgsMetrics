@@ -22,6 +22,7 @@ java -jar cromwell.jar run wgsMetrics.wdl --inputs inputs.json
 Parameter|Value|Description
 ---|---|---
 `inputBam`|File|Input file (bam or sam).
+`reference`|String|reference genome of inputs sample
 
 
 #### Optional workflow parameters:
@@ -34,12 +35,10 @@ Parameter|Value|Default|Description
 Parameter|Value|Default|Description
 ---|---|---|---
 `collectWGSmetrics.picardJar`|String|"$PICARD_ROOT/picard.jar"|Picard jar file to use
-`collectWGSmetrics.refFasta`|String|"$HG19_ROOT/hg19_random.fa"|Path to the reference fasta
 `collectWGSmetrics.metricTag`|String|"WGS"|metric tag is used as a file extension for output
 `collectWGSmetrics.filter`|String|"LENIENT"|Picard filter to use
 `collectWGSmetrics.jobMemory`|Int|18|memory allocated for Job
 `collectWGSmetrics.coverageCap`|Int|500|Coverage cap, picard parameter
-`collectWGSmetrics.modules`|String|"picard/2.21.2 hg19/p13"|Environment module names and version to load (space separated) before command execution
 `collectWGSmetrics.timeout`|Int|24|Maximum amount of time (in hours) the task can run for.
 
 
