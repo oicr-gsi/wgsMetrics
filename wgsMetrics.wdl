@@ -49,6 +49,9 @@ Map[String, GenomeResources] resources = {
       name: "picard/2.21.2",
       url: "https://broadinstitute.github.io/picard/"
     }]
+    output_meta: {
+      outputWGSMetrics: "File with collected metrics"
+    }
   }
 }
 

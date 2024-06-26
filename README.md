@@ -44,9 +44,9 @@ Parameter|Value|Default|Description
 
 ### Outputs
 
-Output | Type | Description
----|---|---
-`outputWGSMetrics`|File|Metrics about the fractions of reads that pass base and mapping-quality filters as well as coverage (read-depth) levels (see https://broadinstitute.github.io/picard/picard-metric-definitions.html#CollectWgsMetrics.WgsMetrics)
+Output | Type | Description | Labels
+---|---|---|---
+`outputWGSMetrics`|File|File with collected metrics|
 
 
 ## Commands

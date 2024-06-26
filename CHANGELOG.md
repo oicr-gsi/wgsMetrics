@@ -1,4 +1,5 @@
-
+# 1.2.0 -- 2924-06-25
+[GRD-797](https://jira.oicr.on.ca/browse/GRD-797) - add vidarr labels to outputs (changes to medata only)
 # 1.1.0 -- 2023-07-04
 Moved assembly-specific code in olive to wdl
 # 1.0.3 -- 2022-08-31
