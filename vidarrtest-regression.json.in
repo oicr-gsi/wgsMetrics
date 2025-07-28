@@ -12,7 +12,7 @@
             "wgsMetrics.collectWGSmetrics.timeout": null,
             "wgsMetrics.inputBam": {
                 "contents": {
-                    "configuration": "/.mounts/labs/gsi/testdata/wgsMetrics/input_data/PCSI_0090_Pa_P_PE_501_WG_526_170203_D00343_0160_ACACFLANXX_CCGTCC_L008_001.annotated.chr22.bam",
+                    "configuration": "/.mounts/labs/gsi/testdata/wgsMetrics/test_inputs/PCSI_Test.annotated.chr22.bam",
                     "externalIds": [
                         {
                             "id": "TEST",
@@ -22,7 +22,7 @@
                 },
                 "type": "EXTERNAL"
             },
-            "wgsMetrics.outputFileNamePrefix": "PCSI_0090_Pa_P_PE_501_WG_526_170203_D00343_0160_ACACFLANXX_CCGTCC_L008_001"
+            "wgsMetrics.outputFileNamePrefix": "PCSI_Test01"
         },
         "description": "WGSMetrics workflow test",
         "engineArguments": {
@@ -44,7 +44,7 @@
             {
                 "metrics_calculate": "@CHECKOUT@/tests/calculate.sh",
                 "metrics_compare": "@CHECKOUT@/tests/compare.sh",
-                "output_metrics": "/.mounts/labs/gsi/testdata/wgsMetrics/output_metrics/test_01_wgs_basic.metrics",
+                "output_metrics": "/.mounts/labs/gsi/testdata/wgsMetrics/output_metrics/workflow_test_01.metrics",
                 "type": "script"
             }
         ]
@@ -62,7 +62,7 @@
             "wgsMetrics.collectWGSmetrics.timeout": null,
             "wgsMetrics.inputBam": {
                 "contents": {
-                    "configuration": "/.mounts/labs/gsi/testdata/wgsMetrics/input_data/PCSI_0090_Pa_P_PE_501_WG_526_170203_D00343_0160_ACACFLANXX_CCGTCC_L008_001.annotated.chr22.bam",
+                    "configuration": "/.mounts/labs/gsi/testdata/wgsMetrics/test_inputs/PCSI_Test.annotated.chr22.bam",
                     "externalIds": [
                         {
                             "id": "TEST",
@@ -94,7 +94,7 @@
             {
                 "metrics_calculate": "@CHECKOUT@/tests/calculate.sh",
                 "metrics_compare": "@CHECKOUT@/tests/compare.sh",
-                "output_metrics": "/.mounts/labs/gsi/testdata/wgsMetrics/output_metrics/no_output_prefix.metrics",
+                "output_metrics": "/.mounts/labs/gsi/testdata/wgsMetrics/output_metrics/workflow_test_02.metrics",
                 "type": "script"
             }
         ]
